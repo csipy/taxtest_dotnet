@@ -11,7 +11,6 @@ public class Tests
     private IPlaywright? playwright;
     private IBrowser? browser;
     private IPage? page;
-    private IBrowserContext? context;
 
     [SetUp]
     public async Task SetUp()
