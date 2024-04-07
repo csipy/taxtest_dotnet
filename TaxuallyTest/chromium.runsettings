@@ -2,13 +2,14 @@
 <RunSettings>
   <!-- NUnit adapter -->  
   <NUnit>
-    <NumberOfTestWorkers>24</NumberOfTestWorkers>
+    <NumberOfTestWorkers>2</NumberOfTestWorkers>
   </NUnit>
   <!-- General run configuration -->
   <RunConfiguration>
     <EnvironmentVariables>
       <!-- For debugging selectors, it's recommend to set the following environment variable -->
-      <DEBUG>pw:api</DEBUG>
+		<BASE_ADDRESS>https://app.taxually.com/</BASE_ADDRESS>
+		<DEBUG>PWDEBUG=1</DEBUG>
     </EnvironmentVariables>
   </RunConfiguration>
   <!-- Playwright -->  

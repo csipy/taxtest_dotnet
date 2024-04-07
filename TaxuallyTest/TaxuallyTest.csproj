@@ -7,7 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Login.cs" />
+	  <Compile Remove="Class1.cs" />
+	  <Compile Remove="Global.cs" />
+	  <Compile Remove="taxuallyDemo\Base\Initialize.cs" />
+	  <Compile Remove="taxuallyDemo\Tests\LoginTest.cs" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -17,10 +20,7 @@
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="State\" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
