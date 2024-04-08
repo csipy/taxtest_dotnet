@@ -9,4 +9,4 @@ install the following packages:
 
 One thing I could have implemented for more advanced solution is saving StorageState from login and use it forother tests, but for some reasons StorageStateOptions did not work on the given Microsoft.Playwright namespace.
 
-Run the test with dotnet test or dotnet test --settings:chromium.runsettings
+Run the test with"dotnet test --settings:chromium.runsettings"
