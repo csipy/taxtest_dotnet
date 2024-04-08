@@ -26,6 +26,7 @@ public class Tests
         string decryptedPassword = PasswordDecryptor.Decrypt(Constants.encryptedPassword);
         await loginPageActions.LoginValidCredentials("csilla.csipak@yahoo.com", decryptedPassword);
         await loginPageActions.AssertValidLogin();
+        await page.Context.StorageStateAsync(new BrowserContextStorageStateOptions { Path = "storage.json" });
     }
     [Test]
     public async Task SignUp()
