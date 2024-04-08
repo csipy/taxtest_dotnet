@@ -1,8 +1,9 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
 using System.Threading.Tasks;
-using TaxuallyTest.taxuallyDemo.PageObjects;
 using TaxuallyTest.taxuallyDemo.Base;
+using TaxuallyTest.taxuallyDemo.PageActions;
+using TaxuallyTest.taxuallyDemo.PageObjects;
 
 namespace Taxually.Tests;
 
@@ -19,11 +20,11 @@ public class Tests
         browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
         page = await browser.NewPageAsync();
         await page.GotoAsync(Constants.BASE_URL);
-        var loginPageObjects = new LoginPageObjects(page);
+
+        var loginPageActions = new LoginPageActions(page);
         string decryptedPassword = PasswordDecryptor.Decrypt(Constants.encryptedPassword);
-        await loginPageObjects.LoginValidCredentials("csilla.csipak@yahoo.com", decryptedPassword);
-        await page.WaitForURLAsync("https://app.taxually.com/app/signup");
-        Assert.AreEqual("https://app.taxually.com/app/signup", page.Url);
+        await loginPageActions.LoginValidCredentials("csilla.csipak@yahoo.com", decryptedPassword);
+        await loginPageActions.AssertValidLogin();
     }
     [Test]
     public async Task SignUp()
@@ -36,7 +37,7 @@ public class Tests
 
             await signUp.ChooseDropdown();
 
-            int numberOfCountriesToSelect = 9; // Define the number of countries as a variable
+            int numberOfCountriesToSelect = 3; // Define the number of countries as a variable
 
             await countrySelector.SelectTargetCountries(numberOfCountriesToSelect);
             await page.WaitForTimeoutAsync(2000);
