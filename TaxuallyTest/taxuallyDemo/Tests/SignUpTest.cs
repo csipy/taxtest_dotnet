@@ -19,7 +19,8 @@ public class Tests
         playwright = await Playwright.CreateAsync();
         browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
         page = await browser.NewPageAsync();
-        await page.GotoAsync(Constants.BASE_URL);
+        string baseUrl = TestContext.Parameters["BASE_URL_PROD"];
+        await page.GotoAsync(baseUrl);
 
         var loginPageActions = new LoginPageActions(page);
         string decryptedPassword = PasswordDecryptor.Decrypt(Constants.encryptedPassword);

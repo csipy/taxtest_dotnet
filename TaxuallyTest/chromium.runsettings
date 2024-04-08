@@ -8,7 +8,6 @@
   <RunConfiguration>
     <EnvironmentVariables>
       <!-- For debugging selectors, it's recommend to set the following environment variable -->
-		<BASE_ADDRESS>https://app.taxually.com/</BASE_ADDRESS>
 		<DEBUG>PWDEBUG=1</DEBUG>
     </EnvironmentVariables>
   </RunConfiguration>
@@ -21,7 +20,7 @@
       <Channel>chrome</Channel>
     </LaunchOptions>
   </Playwright>
-    <Parameter name="webAppUrl" value="https://playwright.dev" />
-    <Parameter name="webAppUserName" value="Admin" />
-    <Parameter name="webAppPassword" value="Password" />
+	<TestRunParameters>
+		<Parameter name="BASE_URL_PROD" value="https://app.taxually.com/" />
+	</TestRunParameters>
 </RunSettings>
