@@ -30,10 +30,11 @@ public class Tests
     public async Task SignUp()
     {
         {
+            var businessDetailsPageObjects = new BusinessDetailsPageObjects(page);
+            var businessDetailsPageActions = new BusinessDetailsPageActions(businessDetailsPageObjects, page);
             var signUp = new SignUpObjects(page);
             var countrySelector = new CountrySelector(page);
             var getVATNumber = new GetVATNumbers(page);
-            var fillinBusinessDetailsPage = new BusinessDetailsPageObjects(page);
 
             await signUp.ChooseDropdown();
 
@@ -47,8 +48,8 @@ public class Tests
 
             await page.WaitForTimeoutAsync(2000);
             await signUp.ClickonNextStepButton();
-
-            await fillinBusinessDetailsPage.BusinessDetailPage();
+            await businessDetailsPageActions.SelectLegalStatusAsCompany();
+            await businessDetailsPageActions.FillBusinessDetails();
         }
     }
     [TearDown]
