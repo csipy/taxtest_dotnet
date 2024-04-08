@@ -4,29 +4,27 @@ using System.Threading.Tasks;
 using TaxuallyTest.taxuallyDemo.Base;
 using TaxuallyTest.taxuallyDemo.PageActions;
 using TaxuallyTest.taxuallyDemo.PageObjects;
+using System;
 
 namespace Taxually.Tests;
 
-public class Tests
+[TestFixture]
+public class SignUpTest : Fixture
 {
-    private IPlaywright? playwright;
-    private IBrowser? browser;
     private IPage? page;
+    private IBrowserContext? context;
 
     [SetUp]
     public async Task SetUp()
     {
-        playwright = await Playwright.CreateAsync();
-        browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
-        page = await browser.NewPageAsync();
+        if (browser == null) throw new InvalidOperationException("Browser not initialized");
+        if (string.IsNullOrEmpty(storageStatePath)) throw new InvalidOperationException("Storage state path is not available");
+
+        context = await browser.NewContextAsync(new BrowserNewContextOptions { StorageStatePath = storageStatePath });
+        page = await context.NewPageAsync();
+
         string baseUrl = TestContext.Parameters["BASE_URL_PROD"];
         await page.GotoAsync(baseUrl);
-
-        var loginPageActions = new LoginPageActions(page);
-        string decryptedPassword = PasswordDecryptor.Decrypt(Constants.encryptedPassword);
-        await loginPageActions.LoginValidCredentials("csilla.csipak@yahoo.com", decryptedPassword);
-        await loginPageActions.AssertValidLogin();
-        await page.Context.StorageStateAsync(new BrowserContextStorageStateOptions { Path = "storage.json" });
     }
     [Test]
     public async Task SignUp()
@@ -52,15 +50,6 @@ public class Tests
             await signUp.ClickonNextStepButton();
             await businessDetailsPageActions.SelectLegalStatusAsCompany();
             await businessDetailsPageActions.FillBusinessDetails();
-        }
-    }
-    [TearDown]
-    public async Task TearDown()
-    {
-        if (browser != null)
-        {
-            await browser.CloseAsync();
-            browser = null;
         }
     }
 }

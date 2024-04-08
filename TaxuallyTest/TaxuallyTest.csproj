@@ -10,7 +10,6 @@
 	  <Compile Remove="Class1.cs" />
 	  <Compile Remove="Global.cs" />
 	  <Compile Remove="taxuallyDemo\Base\Initialize.cs" />
-	  <Compile Remove="taxuallyDemo\Tests\LoginTest.cs" />
 	</ItemGroup>
 
   <ItemGroup>
